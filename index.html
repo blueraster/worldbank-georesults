@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+
+	<!-- Basic Page Needs
+  ================================================== -->
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+	
+	<title>Story Maps</title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<!-- Mobile Specific Metas
+  ================================================== -->
+	<!--<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">-->
+
+	<!-- CSS
+  ================================================== -->
+	<link rel="stylesheet" type="text/css" href="stylesheets/base.css">
+	<link rel="stylesheet" type="text/css" href="stylesheets/skeleton.css">
+	<link rel="stylesheet" type="text/css" href="stylesheets/layout.css">
+	
+	<!--<link rel="stylesheet" type="text/css" href="stylesheets/infoWindow.css">-->
+	<link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.2/js/dojo/dijit/themes/claro/claro.css">	
+	<link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.2/js/dojo/dojox/image/resources/image.css">
+	    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.2/js/esri/css/esri.css" />
+	
+
+
+	<!-- JavaScript
+  ================================================== -->
+	<script src="js/modernizr.js"></script>	
+	<script src="js/knockout-2-2-0.js"></script>	
+	
+	<script type="text/javascript">var djConfig = {parseOnLoad: true};</script>
+
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=3.2Compact"></script>
+	<script src="js/appModel.js"></script>
+	<script src="js/appDefault.js"></script>
+	<script src="js/Events.js"></script>
+	<script src="js/main.js"></script>
+	<script src="js/KnockOutModel.js"></script>
+	<script src="js/ProjectsGridModel.js"></script>
+	<script src="js/FlickrLoader.js"></script>
+	
+	<script src="js/AppController.js"></script>
+	<script src="js/MapController.js"></script>
+	<script src="js/WebmapModel.js"></script>
+	<script src="js/WebmapController.js"></script>
+	<script src="js/WebmapLoader.js"></script>
+	
+	
+	<script src="js/YoutubeController.js"></script>
+	<script src="js/YoutubeLoader.js"></script>	
+	
+	
+	<script src="js/FlickrController.js"></script>
+	<!--<script src="js/FlickrLoader.js"></script>	-->
+	
+	<script src="js/ActivityModel.js"></script>
+	<script src="js/ActivitiesController.js"></script>
+	<script src="js/ActivitiesLoader.js"></script>
+	
+	<script src="js/ProjectsModel.js"></script>
+	<script src="js/ProjectsController.js"></script>
+	<script src="js/ProjectsLoader.js"></script>
+	
+	<script src="js/createSymbol.js"></script>
+	<script src="js/createFeatureLayer.js"></script>	
+	<script src="js/createGraphicsLayer.js"></script>
+
+	
+
+	<!-- Favicons
+	================================================== -->
+	<!--<link rel="shortcut icon" href="images/favicon.ico">
+	<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">-->
+
+</head>
+<body class="claro">
+	
+<div id="fb-root"></div>
+<script>
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+    } (document, 'script', 'facebook-jssdk'));
+</script>
+
+	<!-- Primary Page Layout
+	================================================== -->
+
+	<!-- Delete everything in this .container and get started on your own site! -->
+
+	<!-- STORY MAP BEGIN -->
+	<div class="container" >
+		<div class="sixteen columns" style="margin-top:0px;height:30px;text-align:right"><!-- Share -->
+		<div id="shareBox" style="position:absolute;right:0px;width:500px">
+		<div class="twitter-div" style="float:right;padding-right:10px"></div>
+		
+		<div class="fb-like" data-send="false"
+		data-width="30" layout="button_count" data-show-faces="false" data-font="arial"></div>
+		<span style="width:30px;display:inline-block"></span>
+
+		</div>
+		<!--<span style="width:200px;">fdf</div>-->
+		
+
+		</div>
+		<div class="sixteen columns" style="margin-top:0px;height:40px;">	<!-- Title -->
+			<div id="storyTitle" class="page-title" data-bind="html: currentTitle,attr: { title: currentTitle }"></div>
+			
+		</div>
+		
+
+		
+		<div class="sixteen columns minStoryHeight" id="storyDescriptionContainer" data-bind="css: { storyDescriptionContainer: (currentDescriptionHeight() < 85 ) || (currentDescriptionMinimized() == true)}">	
+			<div id="storyDescription" class="paragraph" data-bind="html: currentDescription"></div>			
+		</div>
+		<div class="sixteen columns" style="margin-top:0px;height:10px" >	
+		<div data-bind="visible:(currentDescriptionMinimized() == true) && (currentDescriptionHeight() > 85)" class="link moreOrLess" id="moreDescription" onclick="animateHeight('storyDescriptionContainer','storyDescription', true)">
+		<span title="more"/>▼</span>
+		</div>
+		<div data-bind="visible:currentDescriptionMinimized() == false" class="link moreOrLess" id="lessDescription" onclick="animateHeight('storyDescriptionContainer','storyDescription', false)">
+		<span title="less"/>▲</span>
+		</div>
+		</div>
+		<div class="sixteen columns" style="margin-top:0px;height:20px;margin-bottom:5px">	<!-- Title currently commented--> 
+			<div class="page-title-links" data-bind="style : {visibility: currentTitleLinks().length<-10?'visible':'hidden'}">Click here to view: <span id="storyTitleLinks"  data-bind="html: currentTitleLinks"></span>
+			</div>
+		</div>
+		
+		<div ><hr></div>
+		
+	</div> 
+
+
+	
+	<div class="container " >
+	
+		<div id="map" class="sixteen columns" style="margin-top:-20px;">
+			<!--<button onclick="zoom()">Zoom</button>-->
+			<div class="basemapContainer">
+				<div dojoType="dijit.TitlePane" title="Basemap" closable="false"  open="false" class="basemapButton">
+					<div dojoType="dijit.layout.ContentPane" class="basemapContent">
+					<div id="basemapGallery" ></div>
+					</div>
+				</div>
+			</div>
+			<div class="legendContainer">
+				<div dojoType="dijit.TitlePane" title="Legend" closable="false"  open="false" class="basemapButton">
+					<div dojoType="dijit.layout.ContentPane" class="legendContent" >
+					<!-- Stories Legend -->
+					<div style="position:relative;float:left;width:140px" data-bind="visible: currentMenu()=='StoriesContainer'">
+					<div>1 - 2&nbsp;<img class="legendIcon" src='images/icons/stories.png' height="20"></div>
+					<div>3 - 5&nbsp;<img class="legendIcon" src='images/icons/stories.png' height="25"></div>
+					</div>
+					<div style="position:relative;float:left;" data-bind="visible: currentMenu()=='StoriesContainer'">
+					<div>6 - 9&nbsp;<img class="legendIcon" src='images/icons/stories.png' height="30"></div>
+					<div>10+&nbsp;&nbsp;<img class="legendIcon" src='images/icons/stories.png' height="35"></div>					
+					</div>
+					<!-- Activities Legend -->
+					<div style="position:relative;float:left;width:140px" data-bind="visible: currentMenu()!='StoriesContainer'">					
+					<div><img class="legendIcon" src='images/icons/agriculture.png'>&nbsp;Agriculture</div>
+					<div><img class="legendIcon" src='images/icons/communication.png' class='legendIcon'/>&nbsp;Communication</div>					
+					<div><img class="legendIcon" src='images/icons/education.png' class='legendIcon'/>&nbsp;Education</div>
+					<div><img class="legendIcon" src='images/icons/energy.png' class='legendIcon'/>&nbsp;Energy</div>
+					<div><img class="legendIcon" src='images/icons/finance.png' class='legendIcon'/>&nbsp;Finance</div>
+					</div>
+					<div style="position:relative;float:left;" data-bind="visible: currentMenu()!='StoriesContainer'">
+					<div><img class="legendIcon" src='images/icons/health.png' class='legendIcon'/>&nbsp;Health</div>
+					<div><img class="legendIcon" src='images/icons/industry.png' class='legendIcon'/>&nbsp;Industry</div>
+					<div><img class="legendIcon" src='images/icons/public.png'class='legendIcon'/>&nbsp;Public</div>
+					<div><img class="legendIcon" src='images/icons/transportation.png' class='legendIcon'/>&nbsp;Transportation</div>				
+					<div><img class="legendIcon" src='images/icons/water.png'class='legendIcon'/>&nbsp;Water</div>
+					</div>
+					</div>
+				</div>
+			</div>
+		</div><!--id="map"-->
+	</div><!-- end container 1-->
+
+		
+		<div class="container" style="margin-top:8px;">
+
+		<div class="sixteen columns">
+			<div class="storyLinks">
+			<!--Root-->
+			<span onclick="navigateTo('StoriesContainer');clearSearch('countries');"  title="All Stories" data-bind="css : {link: linkRootActive()},style : {visibility: linkRootEnabled()?'visible':'hidden'}">All Stories</span>
+			<span data-bind="visible: linkStoryEnabled() || linkCountryEnabled()">></span>
+			<!--Country-->
+			<span onclick="filterCountry()" data-bind="attr: { title: currentCountry },style : {visibility: linkCountryEnabled()?'visible':'hidden'},css : {link: linkCountryActive()}"><span data-bind="text:currentCountry()"></span></span>
+			<span data-bind="visible: linkStoryEnabled()">></span>
+			<!--StoryTitle-->
+			<span onclick="navigateTo('ActivitiesListContainer')" title="Activities" data-bind="title: clickedTitleProjects(),css: {link: linkStoryActive()},style : {visibility: linkStoryEnabled()?'visible':'hidden'}"><span data-bind="text:clickedTitleProjects()"></span></span>
+			</div>
+			
+			<!-- ProjectsContainer ActivitiesListContainer-->
+			<!--
+			<a onclick="navigateTo('Country')"  class="active" data-bind="css : {visibility: linkOverviewEnabled()?'visible':'hidden'}">All Stories</a>
+			<span data-bind="visible: linkProjectEnabled()">></span>
+			
+			<a onclick="navigateTo('StoriesContainer')"  title="Projects" class="active" data-bind="style : {visibility: linkOverviewEnabled()?'visible':'hidden'}">All Stories</a>
+			<span data-bind="visible: linkProjectEnabled()">></span>
+			-->
+			
+			
+			
+			
+			
+			<div class="activityNavLink" data-bind="visible: (linkActivityEnabled()==true) && (activityTotal() > 1)" >
+			<span class="link arrowNav" id="prevActivity" data-bind="style: { visibility: activityCurrent() > 1 ? 'visible' : 'hidden' }">«</span>
+			Activity <span data-bind="text:activityCurrent()"></span> of <span data-bind="text:activityTotal()"></span>
+			<span class="link arrowNav" id="nextActivity" data-bind="style: { visibility: activityCurrent() < activityTotal() ? 'visible' : 'hidden' }">»</span>
+			</div>
+		</div>
+		
+		</div><!-- end container 2-->
+
+		
+
+		<div class="container" style="margin-top:-3px;">
+			<div data-dojo-type="dijit.layout.StackContainer" id="stackContainer" class="sixteen columns stackContainer" >
+			 <!-- Project Grid Images -->
+			  <div data-dojo-type="dijit.layout.ContentPane" title="Stories" id="StoriesContainer" class="photo-container" >
+					
+				
+					<div id="searchContainer" >
+						<div style="position:relative;float:left;">
+							<span>Stories in :</span>
+							<div id="countriesFilteringSelect"></div>
+							<span><img src='images/clear.gif' class="link" data-bind="visible: currentCountry().length > 0" style="vertical-align:middle" onclick="clearSearch('countries')"/></span>
+						</div>
+						<div style="position:relative;float:right;width:270px;text-align:right;" id="searchDiv">
+							
+							<input type="text" name="projectsSearch" id="projectsSearch" style="float:right"/>
+							<span ><img src='images/clear.gif'  class="link" data-bind="visible: currentInput().length > 1" style="vertical-align:middle;"  onclick="clearSearch('input')"/>&nbsp;&nbsp;</span>
+						</div>
+					</div>
+					
+					<div id="projectsGrid" style="margin-top:0px" data-bind="html:noProjectsMsg()"></div>
+					<div class="gridPageNav" data-bind="visible: projectGridPages()>1">
+					<div class="gridPageNavButtonLeft link" id="prevProjectGrid" data-bind="visible: projectGridCurrent()>1"><span class="arrowNav" title="Previous">«</span> Previous</div>
+					<div class="gridPageNavButtonRight link" id="nextProjectGrid" data-bind="visible:projectGridCurrent() < projectGridPages()">Next <span class="arrowNav" title="Next">»</span></div>
+					<!--<img src="images/left-arrow.png" align="left" class="link" id="prevProjectGrid" data-bind="visible: projectGridCurrent()>1"/>					
+					<img src="images/right-arrow.png" align="right" class="link" id="nextProjectGrid" data-bind="visible: projectGridCurrent() < projectGridPages()"/>-->
+					</div>
+
+			  </div>
+			  <!-- Activites Grid Images -->
+			  <div data-dojo-type="dijit.layout.ContentPane" title="Activities"  id="ActivitiesListContainer"  class="photo-container" >				
+					<span id="activitiesGrid"></span>
+					
+
+					<div class="gridPageNav" >
+					<div class="gridPageNavButtonLeft link" id="prevActivityGrid" data-bind="visible: activityGridCurrent()>1" title="Previous">
+					<span class="arrowNav" title="Previous">«</span> Previous
+					</div>
+					<div class="gridPageNavButtonRight link" id="nextActivityGrid" data-bind="visible:activityGridCurrent() < activityGridPages()" title="Previous"> 
+					Next <span class="arrowNav" title="Next">»</span>
+					</div>
+					
+					</div>
+			  </div>
+			  <!-- Activity Images -->
+			  <div data-dojo-type="dijit.layout.ContentPane" title="Activity"  id="ActivityContainer">				
+				<div id="activityDisplayContainer" class="photo-container"></div>
+				
+				<div id="activityGalleryContainer" class="photo-container">
+					
+					
+					<div id="activityNav">
+					<div class="gridCarouselLeft link" id="prevBelt"><span class="arrowNav">«</span></div>
+					<div class="gridCarouselRight link" id="nextBelt"><span class="arrowNav">»</span></div>
+					</div>
+					<div id="activityGalleryWrapper" data-dojo-type="dojox.mobile.ScrollableView" scrollDir="h"><!---->
+					<div id="activityGallery">
+					</div>
+					</div>
+				</div>
+
+			  </div>
+
+			</div>
+		</div ><!-- end container 3-->
+
+
+	</div>
+	
+	<div class="container">
+		<hr>
+	</div>
+	
+
+	    
+     <!-- STORY MAP END --><!-- container -->
+
+
+<!-- End Document
+================================================== -->
+</body>
+</html>
