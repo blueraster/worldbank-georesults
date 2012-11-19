@@ -289,7 +289,8 @@ var FlickrController = function(){
 					var type1 = type || "default";
 					var icon = type1+".png";
 					
-					
+					type1 = type1.charAt(0).toUpperCase() + type1.slice(1).toLowerCase();//uppercase first letter
+
 					dojo.place("<div class='gridItem' id='activity"+uniqueIDDiv+"'><img class='activitiesImage' align='left' src='"+squarePic+"' /><img src='images/icons_shadowless/"+icon+"' title='"+type1+"' style='position:absolute;bottom:0px;right:0px;'/><span class='gridText'>"+activityModel.get("f."+uniqueID).title+"</span></div>","activitiesGrid");
 					var mouseoverHandle = dojo.connect(dojo.byId("activity"+uniqueIDDiv),eventType.onmouseover,dojo.hitch(that,"imageMouseOverHandler",uniqueID));						
 					dojo.publish(Events.addHandler,[appModel.get("app.activitiesEventHandlers"),mouseoverHandle]);
@@ -366,7 +367,8 @@ var FlickrController = function(){
 					var activityID = uniqueID.split(".")[1];
 					projectID = projectID.substring(1);
 					activityID = activityID.substring(1);		
-					//alert("FlickController " + projectID);		
+					//alert("FlickController " + projectID);
+					console.log("---->shared from handleNavigation");	
 					dojo.publish(Events.shareURLupdate,[appModel.get("app.queryShareURL"),projectID,activityID]);
 			
 					dojo.publish(Events.removeAllHandlers,["activityCarouselEventHandlers"]);

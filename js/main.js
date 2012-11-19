@@ -88,7 +88,8 @@ dijit.byId("countriesFilteringSelect").set("value", appModel.get("app.KOModel").
 appModel.get("app.KOModel").currentTitleLinks("");	
 appModel.get("app.KOModel").linkCountryEnabled(true);
 appModel.get("app.KOModel").linkRootActive(true);
-dojo.publish(Events.shareURLupdate,[appModel.get("app.queryShareURL"),"none","none"]);
+//console.log("---->shared from FILTERCOUNTRY");
+//dojo.publish(Events.shareURLupdate,[appModel.get("app.queryShareURL"),"none","none"]);
 }
 
 function animateHeight(container,targetDiv,expand){
@@ -101,7 +102,8 @@ case "countries":
 appModel.set("currentSearchCountry","");
 appModel.get("app.KOModel").currentCountry("");
 dijit.byId("countriesFilteringSelect").set("value", "");
-dojo.publish(Events.shareURLupdate,[appModel.get("app.queryShareURL"),"none","none"]);	
+//console.log("---->shared from CLEARSEARCH");
+//dojo.publish(Events.shareURLupdate,[appModel.get("app.queryShareURL"),"none","none"]);	
 break;
 case "input":
 dojo.byId("projectsSearch").value = "";
@@ -278,11 +280,12 @@ if (query!=undefined){
 
 
 
-
+//dojo.hash("#");
 //alert("main initShare" + queryObject["project"]);
-if (uri.indexOf("#")>-1){
+//if (uri.indexOf("#")>-1){
+console.log("---->shared from INITSHARE");
 dojo.publish(Events.shareURLupdate,[appModel.get("app.queryShareURL"), p.toString(), a.toString()]);	
-}
+//}
 
 //Monitor Change in URL		
 dojo.subscribe("/dojo/hashchange", function (hash){	
@@ -300,7 +303,7 @@ dojo.subscribe("/dojo/hashchange", function (hash){
 		}
 
 		
-
+		alert("navigate home");
 		//go to home
 		navigateTo('StoriesContainer');
 

@@ -13,7 +13,7 @@ var appDefault = (function () {
 				],
 	flickrPerPage:100,
 	//webmap:"ef142e41896f4362ac7fb51562067f8d",	
-	title: "Story Maps",
+	title: "Georesults",
 	subTitle: "World Bank",
 	logo:"images/world-bank-logo.jpg",
 	zoomLevel:7,

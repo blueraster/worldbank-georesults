@@ -107,7 +107,7 @@
 		<div class="twitter-div" style="float:right;padding-right:10px"></div>
 		
 		<div class="fb-like" data-send="false"
-		data-width="30" layout="button_count" data-show-faces="false" data-font="arial"></div>
+		data-width="500" layout="button_count" data-show-faces="false" data-font="arial"></div>
 		<span style="width:30px;display:inline-block"></span>
 
 		</div>
@@ -194,7 +194,7 @@
 		<div class="sixteen columns">
 			<div class="storyLinks">
 			<!--Root-->
-			<span onclick="navigateTo('StoriesContainer');clearSearch('countries');"  title="All Stories" data-bind="css : {link: linkRootActive()},style : {visibility: linkRootEnabled()?'visible':'hidden'}">All Stories</span>
+			<span onclick="navigateTo('StoriesContainer');clearSearch('countries');"  title="All Georesults" data-bind="css : {link: linkRootActive()},style : {visibility: linkRootEnabled()?'visible':'hidden'}">All Georesults</span>
 			<span data-bind="visible: linkStoryEnabled() || linkCountryEnabled()">></span>
 			<!--Country-->
 			<span onclick="filterCountry()" data-bind="attr: { title: currentCountry },style : {visibility: linkCountryEnabled()?'visible':'hidden'},css : {link: linkCountryActive()}"><span data-bind="text:currentCountry()"></span></span>
@@ -218,7 +218,7 @@
 			
 			<div class="activityNavLink" data-bind="visible: (linkActivityEnabled()==true) && (activityTotal() > 1)" >
 			<span class="link arrowNav" id="prevActivity" data-bind="style: { visibility: activityCurrent() > 1 ? 'visible' : 'hidden' }">«</span>
-			Activity <span data-bind="text:activityCurrent()"></span> of <span data-bind="text:activityTotal()"></span>
+			Site <span data-bind="text:activityCurrent()"></span> of <span data-bind="text:activityTotal()"></span>
 			<span class="link arrowNav" id="nextActivity" data-bind="style: { visibility: activityCurrent() < activityTotal() ? 'visible' : 'hidden' }">»</span>
 			</div>
 		</div>
@@ -235,7 +235,7 @@
 				
 					<div id="searchContainer" >
 						<div style="position:relative;float:left;">
-							<span>Stories in :</span>
+							<span>Georesults in :</span>
 							<div id="countriesFilteringSelect"></div>
 							<span><img src='images/clear.gif' class="link" data-bind="visible: currentCountry().length > 0" style="vertical-align:middle" onclick="clearSearch('countries')"/></span>
 						</div>

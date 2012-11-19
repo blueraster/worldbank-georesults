@@ -334,6 +334,7 @@ var ProjectsController = function(){
 			var clickedProjectID, clickedProject, clickedDescription, clickedProjectLinksURL, clickedProjectLinksText = "";
 			projectID = id.substring(1);
 			//alert("ProjectsController " + projectID);
+			console.log("---->shared from projectClickHandler");	
 			dojo.publish(Events.shareURLupdate,[appModel.get("app.queryShareURL"),projectID,"none"]);
 
 			//for(i = 0; i < dataItems.length; i++){		

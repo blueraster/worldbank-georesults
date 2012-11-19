@@ -117,8 +117,9 @@ var AppController = function(){
 						appModel.get("app.KOModel").linkActivityEnabled(false);
 						appModel.get("app.KOModel").linkActivityActive(false);
 						
-						dojo.publish(Events.resizeContent,["stackContainer","height",410]);					
-						dojo.publish(Events.shareURLupdate,[appModel.get("app.queryShareURL"),appModel.get("app.currentProjectID"),"none"]);
+						dojo.publish(Events.resizeContent,["stackContainer","height",410]);		
+						console.log("---->shared from handleNavigation");
+						dojo.publish(Events.shareURLupdate,[appModel.get("app.queryShareURL"),"none","none"]);
 
 						
 					break;
@@ -153,7 +154,8 @@ var AppController = function(){
 							appModel.set("querystring",false);
 						}		
 						dojo.publish(Events.resizeContent,["stackContainer","height",370]);
-						dojo.publish(Events.shareURLupdate,[appModel.get("app.queryShareURL"),appModel.get("app.currentProjectID"),appModel.get("app.currentActivityID")]);					
+						console.log("---->shared from handleNavigation");
+						dojo.publish(Events.shareURLupdate,[appModel.get("app.queryShareURL"),appModel.get("app.currentProjectID"),"none"]);					
 						//dojo.style("stackContainer","height","380px");							
 					break;
 					case "ActivityContainer":
@@ -183,7 +185,7 @@ var AppController = function(){
 					}
 					appModel.get("app.KOModel").currentDescriptionMinimized(true);
 					appModel.get("app.KOModel").currentDescriptionHeight(parseInt(dojo.style("storyDescription","height")));;							
-					
+					dojo.publish(Events.shareURLupdate,[appModel.get("app.queryShareURL"),appModel.get("app.currentProjectID"),appModel.get("app.currentActivityID")]);					
 					
 					//console.log("Minimized? " + appModel.get("app.KOModel").currentDescriptionMinimized());
 					//console.log("Content Height - " + appModel.get("app.KOModel").currentDescriptionHeight());
@@ -267,18 +269,30 @@ var AppController = function(){
 				
 				var shareURL = url+"#";
 				var hashObj = {};
+				var hasHash = false;
 
 				if (project!="none"){
 				shareURL += "project="+project;
 				hashObj.project = project;
+				hasHash=true;
+				//alert(project);
 				}
 				
 				if (activity!="none"){
 				shareURL += "&activity="+activity;
 				hashObj.activity = activity;
+				hasHash=true;
+				//alert(activity);
 				}
 				updateHashByClick = true;
-				dojo.hash(dojo.objectToQuery(hashObj));
+				if (hasHash){
+			
+					dojo.hash(dojo.objectToQuery(hashObj));
+					
+				} else {
+					shareURL += "home";
+				}
+				
 
 				setTimeout(function(){
 					updateHashByClick = false;
@@ -297,10 +311,12 @@ var AppController = function(){
 					//node.innerHTML = "<div class='fb-like' data-href='"+shareURL+"' data-send='false'	data-width='30' layout='button_count' data-show-faces='false' data-font='arial'></div>";									
 					//dojo.place("<div class='fb-like' data-href='"+shareURL+"' data-send='false'	data-width='30' layout='button_count' data-show-faces='false' data-font='arial'></div>",node,"only");									
 				});
+
+				
 				
 				dojo.query(".twitter-div").forEach(function(node){	
 					//shareURL = "http://www.worldbank.com";
-					node.innerHTML = "<iframe allowtransparency='true' frameborder='0' scrolling='no' src='https://platform.twitter.com/widgets/tweet_button.html?url="+shareURL+"&text=World Bank Story Maps' style='width:130px; height:20px;'></iframe>";
+					node.innerHTML = "<iframe allowtransparency='true' frameborder='0' scrolling='no' src='https://platform.twitter.com/widgets/tweet_button.html?url="+shareURL+"&text=World Bank Georesults' style='width:130px; height:20px;'></iframe>";
 				});
 			};
 			
