@@ -1,22 +1,22 @@
-dojo.require("dijit.dijit"); // optimize: load dijit layer
+//dojo.require("dijit.dijit"); // optimize: load dijit layer
 dojo.require("dijit.layout.BorderContainer");
 dojo.require("dijit.layout.ContentPane");
 dojo.require("esri.map");
-dojo.require("dojox.grid.DataGrid");
+//dojo.require("dojox.grid.DataGrid");
 dojo.require("dojox.data.CsvStore");
-dojo.require("dijit.form.ComboBox");
-dojo.require("dojox.data.FlickrStore");
+//dojo.require("dijit.form.ComboBox");
+//dojo.require("dojox.data.FlickrStore");
 dojo.require("esri.layers.FeatureLayer");
 dojo.require("dijit.form.FilteringSelect");
 dojo.require("dojo.data.ItemFileReadStore");
 dojo.require("dijit.layout.StackContainer");
 dojo.require("dijit.form.Button");
-dojo.require("dojox.image.Gallery");
-dojo.require("dojox.data.FlickrRestStore");
-dojo.require("dojox.image.ThumbnailPicker");
+//dojo.require("dojox.image.Gallery");
+//dojo.require("dojox.data.FlickrRestStore");
+//dojo.require("dojox.image.ThumbnailPicker");
 dojo.require("dojo.parser");
 dojo.require("dijit.form.TextBox");
-dojo.require("dojo.window");
+//dojo.require("dojo.window");
 dojo.require("dijit.TitlePane");
 dojo.require("esri.dijit.BasemapGallery");
 dojo.require("esri.arcgis.utils");
@@ -30,7 +30,7 @@ dojo.require("esri.geometry");
 dojo.require("dojox.dtl.filter.strings");
 dojo.require("dojox.mobile.ScrollableView");
 dojo.require("dojo.hash");
-dojo.require("dojox.html.entities");
+//dojo.require("dojox.html.entities");
 //dojo.require("dojo.back");
 
 
